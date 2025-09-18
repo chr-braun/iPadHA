@@ -24,6 +24,7 @@ const config = require('../config/ipadha');
 // Express App erstellen
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0'; // Alle Interfaces binden
 
 // Middleware
 app.use(helmet({
@@ -289,10 +290,10 @@ app.use((error, req, res, next) => {
 });
 
 // Server starten
-app.listen(PORT, () => {
-    console.log(`iPadHA Server läuft auf Port ${PORT}`);
-    console.log(`Dashboard: http://localhost:${PORT}`);
-    console.log(`API: http://localhost:${PORT}/api`);
+app.listen(PORT, HOST, () => {
+    console.log(`iPadHA Server läuft auf ${HOST}:${PORT}`);
+    console.log(`Dashboard: http://${HOST}:${PORT}`);
+    console.log(`API: http://${HOST}:${PORT}/api`);
     console.log(`Home Assistant: ${config.homeAssistant.url}`);
 });
 
