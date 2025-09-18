@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# iPadHA Terminal Plugin Installation Script
-# Einfach und schnell für Home Assistant Terminal Plugin
+# iPadHA Simple Installation Script
+# Ohne npm - nur die wichtigsten Dateien
 
 set -e
 
-echo "🚀 iPadHA Terminal Plugin Installation"
-echo "======================================"
+echo "🚀 iPadHA Simple Installation"
+echo "============================="
 echo ""
 
 # Farben
@@ -29,30 +29,18 @@ unzip -q "ipadha.zip"
 cp -r "iPadHA-0.1.0"/* "$INSTALL_DIR/"
 rm -rf "ipadha.zip" "iPadHA-0.1.0"
 
-echo -e "${BLUE}ℹ️  Installiere Node.js...${NC}"
-# Node.js installieren falls nicht vorhanden
-if ! command -v node &> /dev/null; then
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-    apt-get update
-    apt-get install -y nodejs
-fi
-
-echo -e "${BLUE}ℹ️  Installiere Dependencies...${NC}"
-cd "$INSTALL_DIR"
-npm install --production
-
-echo -e "${BLUE}ℹ️  Erstelle Konfiguration...${NC}"
+echo -e "${BLUE}ℹ️  Erstelle einfache Konfiguration...${NC}"
 cat > "$CONFIG_DIR/ipadha.js" << 'EOF'
 /**
- * iPadHA Terminal Plugin Konfiguration
+ * iPadHA Simple Konfiguration
  */
 
 module.exports = {
     homeAssistant: {
         url: 'http://localhost:8123',
-        token: process.env.HA_TOKEN || 'YOUR_LONG_LIVED_ACCESS_TOKEN',
+        token: 'YOUR_LONG_LIVED_ACCESS_TOKEN',
         pollingInterval: 5000,
-        useWebSocket: true,
+        useWebSocket: false, // Polling für bessere Kompatibilität
         reconnectInterval: 10000
     },
     
@@ -75,17 +63,6 @@ module.exports = {
                         entities: ['light.wohnzimmer', 'switch.steckdose_1', 'sensor.temperatur_wohnzimmer']
                     }
                 ]
-            },
-            {
-                id: 'lights',
-                title: 'Lichter',
-                icon: '💡',
-                groups: [
-                    {
-                        title: 'Alle Lichter',
-                        entities: ['light.wohnzimmer', 'light.kueche', 'light.schlafzimmer']
-                    }
-                ]
             }
         ]
     },
@@ -93,7 +70,7 @@ module.exports = {
     ios9: {
         enablePolyfills: true,
         disableAnimations: false,
-        forcePolling: false,
+        forcePolling: true, // Polling für iOS 9.3.5
     },
     
     design: {
@@ -112,18 +89,19 @@ module.exports = {
 };
 EOF
 
-echo -e "${GREEN}✅ iPadHA Installation abgeschlossen!${NC}"
+echo -e "${GREEN}✅ iPadHA Simple Installation abgeschlossen!${NC}"
 echo ""
 echo "📱 Dashboard URL: http://$(hostname -I | awk '{print $1}'):3000"
 echo "📁 Installationsverzeichnis: $INSTALL_DIR"
 echo "⚙️  Konfiguration: $CONFIG_DIR/ipadha.js"
 echo ""
 echo "🚀 Nächste Schritte:"
-echo "1. Server starten: cd $INSTALL_DIR && npm start"
-echo "2. Dashboard öffnen: http://$(hostname -I | awk '{print $1}'):3000"
-echo "3. Entities anpassen: nano $CONFIG_DIR/ipadha.js"
+echo "1. Token in Konfiguration eintragen: nano $CONFIG_DIR/ipadha.js"
+echo "2. Node.js installieren: curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs"
+echo "3. Dependencies installieren: cd $INSTALL_DIR && npm install"
+echo "4. Server starten: cd $INSTALL_DIR && npm start"
 echo ""
-echo "📋 Befehle:"
-echo "  Start:  cd $INSTALL_DIR && npm start"
-echo "  Stop:   Ctrl+C"
-echo "  Logs:   cd $INSTALL_DIR && npm start"
+echo "📋 Manuelle Installation:"
+echo "  Node.js: curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install -y nodejs"
+echo "  Dependencies: cd $INSTALL_DIR && npm install"
+echo "  Start: cd $INSTALL_DIR && npm start"
