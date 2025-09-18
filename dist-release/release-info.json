@@ -1,0 +1,56 @@
+{
+  "version": "0.1.0",
+  "releaseName": "iPadHA v0.1.0 - Initial Release",
+  "releaseDate": "2025-09-18T19:39:26.752Z",
+  "assets": {
+    "source": "ipadha-source-v0.1.0.zip",
+    "hacs": "ipadha-hacs-v0.1.0.zip",
+    "standalone": "ipadha-standalone-v0.1.0.zip"
+  },
+  "buildInfo": {
+    "nodeVersion": "v24.3.0",
+    "platform": "darwin",
+    "arch": "x64",
+    "timestamp": 1758224366752
+  },
+  "installation": {
+    "hacs": {
+      "repository": "https://github.com/chr-braun/iPadHA",
+      "category": "frontend",
+      "requirements": [
+        "Home Assistant 2021.1.0+",
+        "HACS"
+      ]
+    },
+    "manual": {
+      "requirements": [
+        "Node.js 14+",
+        "Home Assistant 2021.1.0+"
+      ],
+      "steps": [
+        "1. Download and extract ipadha-standalone-v0.1.0.zip",
+        "2. Run: npm install",
+        "3. Run: npm run build:hacs",
+        "4. Copy to Home Assistant www directory",
+        "5. Configure config/ipadha.js",
+        "6. Restart Home Assistant"
+      ]
+    }
+  },
+  "features": [
+    "iOS 9.3.5 Compatibility",
+    "Glasmorphism Design",
+    "Touch Optimization",
+    "Home Assistant Integration",
+    "HACS Support",
+    "Slider Controls",
+    "Real-time Updates",
+    "Performance Optimized"
+  ],
+  "compatibility": {
+    "ios": "9.3.5+",
+    "homeassistant": "2021.1.0+",
+    "hacs": "1.0.0+",
+    "nodejs": "14.0.0+"
+  }
+}

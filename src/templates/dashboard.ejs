@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="<%= title %>">
+    
+    <title><%= title %></title>
+    
+    <!-- iOS 9.3.5 Safari Optimierungen -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/icons/favicon-32x32.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/ipadha.css">
+    <link rel="stylesheet" href="/css/glass.css">
+    <link rel="stylesheet" href="/css/touch.css">
+    
+    <!-- iOS 9.3.5 spezifische Styles -->
+    <style>
+        /* iOS 9.3.5 Fallbacks */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hardware-Beschleunigung */
+        .tile, .slider-thumb {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+        
+        /* Touch-Optimierung */
+        .tile {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="ipadha-dashboard ios9-optimized">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">
+                <span class="title-icon">🏠</span>
+                <%= title %>
+            </h1>
+            <div class="header-info">
+                <span class="current-time" id="current-time">--:--</span>
+                <span class="connection-status" id="connection-status">●</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <!-- Navigation Tabs -->
+        <nav class="dashboard-nav">
+            <button class="nav-tab active" data-tab="overview">
+                <span class="tab-icon">🏠</span>
+                <span class="tab-label">Übersicht</span>
+            </button>
+            <button class="nav-tab" data-tab="lights">
+                <span class="tab-icon">💡</span>
+                <span class="tab-label">Lichter</span>
+            </button>
+            <button class="nav-tab" data-tab="sensors">
+                <span class="tab-icon">📊</span>
+                <span class="tab-label">Sensoren</span>
+            </button>
+            <button class="nav-tab" data-tab="media">
+                <span class="tab-icon">🎵</span>
+                <span class="tab-label">Medien</span>
+            </button>
+        </nav>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Übersicht Tab -->
+            <div class="tab-panel active" id="overview">
+                <div class="dashboard-grid">
+                    <!-- Lichter Gruppe -->
+                    <% if (entities.lights && entities.lights.length > 0) { %>
+                    <div class="entity-group">
+                        <h3 class="group-title">
+                            <span class="group-icon">💡</span>
+                            Lichter
+                        </h3>
+                        <div class="group-tiles">
+                            <% entities.lights.forEach(function(light) { %>
+                            <div class="tile light-tile" data-entity-id="<%= light.entity_id %>">
+                                <div class="tile-icon">
+                                    <span class="icon">💡</span>
+                                </div>
+                                <div class="tile-content">
+                                    <h4 class="tile-title"><%= light.attributes.friendly_name || light.entity_id %></h4>
+                                    <div class="tile-status">
+                                        <span class="status-indicator <%= light.state === 'on' ? 'on' : 'off' %>"></span>
+                                        <span class="status-text"><%= light.state === 'on' ? 'AN' : 'AUS' %></span>
+                                    </div>
+                                    <% if (light.attributes.brightness !== undefined) { %>
+                                    <div class="tile-slider">
+                                        <div class="slider-track">
+                                            <div class="slider-thumb" style="left: <%= (light.attributes.brightness / 255 * 100) %>%"></div>
+                                        </div>
+                                        <div class="slider-value"><%= Math.round(light.attributes.brightness / 255 * 100) %>%</div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <!-- Schalter Gruppe -->
+                    <% if (entities.switches && entities.switches.length > 0) { %>
+                    <div class="entity-group">
+                        <h3 class="group-title">
+                            <span class="group-icon">🔌</span>
+                            Schalter
+                        </h3>
+                        <div class="group-tiles">
+                            <% entities.switches.forEach(function(switchEntity) { %>
+                            <div class="tile switch-tile" data-entity-id="<%= switchEntity.entity_id %>">
+                                <div class="tile-icon">
+                                    <span class="icon">🔌</span>
+                                </div>
+                                <div class="tile-content">
+                                    <h4 class="tile-title"><%= switchEntity.attributes.friendly_name || switchEntity.entity_id %></h4>
+                                    <div class="tile-status">
+                                        <span class="status-indicator <%= switchEntity.state === 'on' ? 'on' : 'off' %>"></span>
+                                        <span class="status-text"><%= switchEntity.state === 'on' ? 'AN' : 'AUS' %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <!-- Sensoren Gruppe -->
+                    <% if (entities.sensors && entities.sensors.length > 0) { %>
+                    <div class="entity-group">
+                        <h3 class="group-title">
+                            <span class="group-icon">📊</span>
+                            Sensoren
+                        </h3>
+                        <div class="group-tiles">
+                            <% entities.sensors.slice(0, 6).forEach(function(sensor) { %>
+                            <div class="tile sensor-tile" data-entity-id="<%= sensor.entity_id %>">
+                                <div class="tile-icon">
+                                    <span class="icon">📊</span>
+                                </div>
+                                <div class="tile-content">
+                                    <h4 class="tile-title"><%= sensor.attributes.friendly_name || sensor.entity_id %></h4>
+                                    <div class="tile-value">
+                                        <span class="value"><%= sensor.state %></span>
+                                        <span class="unit"><%= sensor.attributes.unit_of_measurement || '' %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Lichter Tab -->
+            <div class="tab-panel" id="lights">
+                <div class="dashboard-grid">
+                    <% if (entities.lights && entities.lights.length > 0) { %>
+                        <% entities.lights.forEach(function(light) { %>
+                        <div class="tile light-tile large" data-entity-id="<%= light.entity_id %>">
+                            <div class="tile-icon">
+                                <span class="icon">💡</span>
+                            </div>
+                            <div class="tile-content">
+                                <h4 class="tile-title"><%= light.attributes.friendly_name || light.entity_id %></h4>
+                                <div class="tile-status">
+                                    <span class="status-indicator <%= light.state === 'on' ? 'on' : 'off' %>"></span>
+                                    <span class="status-text"><%= light.state === 'on' ? 'AN' : 'AUS' %></span>
+                                </div>
+                                <% if (light.attributes.brightness !== undefined) { %>
+                                <div class="tile-slider">
+                                    <div class="slider-track">
+                                        <div class="slider-thumb" style="left: <%= (light.attributes.brightness / 255 * 100) %>%"></div>
+                                    </div>
+                                    <div class="slider-value"><%= Math.round(light.attributes.brightness / 255 * 100) %>%</div>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <% }); %>
+                    <% } else { %>
+                    <div class="empty-state">
+                        <span class="empty-icon">💡</span>
+                        <h3>Keine Lichter gefunden</h3>
+                        <p>Es wurden keine Licht-Entitäten in Home Assistant gefunden.</p>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Sensoren Tab -->
+            <div class="tab-panel" id="sensors">
+                <div class="dashboard-grid">
+                    <% if (entities.sensors && entities.sensors.length > 0) { %>
+                        <% entities.sensors.forEach(function(sensor) { %>
+                        <div class="tile sensor-tile" data-entity-id="<%= sensor.entity_id %>">
+                            <div class="tile-icon">
+                                <span class="icon">📊</span>
+                            </div>
+                            <div class="tile-content">
+                                <h4 class="tile-title"><%= sensor.attributes.friendly_name || sensor.entity_id %></h4>
+                                <div class="tile-value">
+                                    <span class="value"><%= sensor.state %></span>
+                                    <span class="unit"><%= sensor.attributes.unit_of_measurement || '' %></span>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    <% } else { %>
+                    <div class="empty-state">
+                        <span class="empty-icon">📊</span>
+                        <h3>Keine Sensoren gefunden</h3>
+                        <p>Es wurden keine Sensor-Entitäten in Home Assistant gefunden.</p>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Medien Tab -->
+            <div class="tab-panel" id="media">
+                <div class="dashboard-grid">
+                    <% if (entities.media_players && entities.media_players.length > 0) { %>
+                        <% entities.media_players.forEach(function(media) { %>
+                        <div class="tile media-tile large" data-entity-id="<%= media.entity_id %>">
+                            <div class="tile-icon">
+                                <span class="icon">🎵</span>
+                            </div>
+                            <div class="tile-content">
+                                <h4 class="tile-title"><%= media.attributes.friendly_name || media.entity_id %></h4>
+                                <div class="tile-status">
+                                    <span class="status-indicator <%= media.state === 'playing' ? 'playing' : 'paused' %>"></span>
+                                    <span class="status-text"><%= media.state === 'playing' ? 'Wiedergabe' : 'Pause' %></span>
+                                </div>
+                                <% if (media.attributes.media_title) { %>
+                                <div class="media-info">
+                                    <div class="media-title"><%= media.attributes.media_title %></div>
+                                    <% if (media.attributes.media_artist) { %>
+                                    <div class="media-artist"><%= media.attributes.media_artist %></div>
+                                    <% } %>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <% }); %>
+                    <% } else { %>
+                    <div class="empty-state">
+                        <span class="empty-icon">🎵</span>
+                        <h3>Keine Media Player gefunden</h3>
+                        <p>Es wurden keine Media Player-Entitäten in Home Assistant gefunden.</p>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Lade Dashboard...</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/ipadha.js"></script>
+    <script src="/js/touch.js"></script>
+    <script src="/js/sliders.js"></script>
+    
+    <!-- iOS 9.3.5 spezifische Initialisierung -->
+    <script>
+        // iOS 9.3.5 Detection
+        function isIOS9() {
+            var userAgent = navigator.userAgent;
+            var iOS = /iPad|iPhone|iPod/.test(userAgent);
+            var version = userAgent.match(/OS (\d+)_(\d+)/);
+            return iOS && version && parseInt(version[1]) === 9 && parseInt(version[2]) <= 3;
+        }
+
+        // iOS 9.3.5 Optimierungen aktivieren
+        if (isIOS9()) {
+            document.body.classList.add('ios9');
+            console.log('iOS 9.3.5 Optimierungen aktiv');
+        }
+
+        // Dashboard initialisieren
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.iPadHA) {
+                window.iPadHA.init({
+                    homeAssistant: {
+                        url: '<%= config.homeAssistant.url %>',
+                        token: '<%= config.homeAssistant.token %>'
+                    },
+                    dashboard: {
+                        autoRefresh: <%= config.dashboard.autoRefresh %>,
+                        touchOptimized: true
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

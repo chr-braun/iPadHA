@@ -1,0 +1,26 @@
+{
+  "name": "iPadHA",
+  "content_in_root": false,
+  "filename": "ipadha",
+  "render_readme": true,
+  "domains": ["frontend"],
+  "homeassistant": "2021.1.0",
+  "iot_class": "Local Push",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@chr-braun"],
+  "version": "0.1.0",
+  "description": "iPadHA - Home Assistant Dashboard für iOS 9.3.5 mit Glasmorphismus-Design",
+  "category": "frontend",
+  "tags": [
+    "ipad",
+    "ios9",
+    "dashboard",
+    "glasmorphism",
+    "touch-optimized",
+    "home-assistant"
+  ],
+  "url": "https://github.com/chr-braun/iPadHA",
+  "documentation": "https://github.com/chr-braun/iPadHA/blob/main/README.md",
+  "issue_tracker": "https://github.com/chr-braun/iPadHA/issues"
+}

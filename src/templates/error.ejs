@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title><%= title %> - iPadHA</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/ipadha.css">
+    <link rel="stylesheet" href="/css/glass.css">
+    
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .error-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .error-message {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .error-details {
+            font-size: 14px;
+            color: var(--text-muted);
+            background: var(--glass-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-width: 500px;
+            word-break: break-word;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent-blue);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn:hover {
+            background: var(--accent-green);
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+    </style>
+</head>
+<body class="ipadha-error">
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h1 class="error-title"><%= title %></h1>
+        <p class="error-message"><%= message %></p>
+        
+        <% if (error) { %>
+        <div class="error-details">
+            <strong>Fehlerdetails:</strong><br>
+            <%= error %>
+        </div>
+        <% } %>
+        
+        <div class="error-actions">
+            <a href="/" class="btn">Zurück zum Dashboard</a>
+            <button onclick="location.reload()" class="btn btn-secondary">Seite neu laden</button>
+        </div>
+    </div>
+</body>
+</html>

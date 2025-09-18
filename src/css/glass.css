@@ -1,0 +1,423 @@
+/**
+ * Glasmorphismus-Effekte für iPadHA
+ * Moderne Glaseffekte mit iOS 9.3.5 Fallbacks
+ */
+
+/* Glasmorphismus Base */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 100%);
+}
+
+.glass-card:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--shadow-large);
+    transform: translateY(-2px);
+}
+
+/* Glasmorphismus Varianten */
+.glass-card-small {
+    padding: 12px;
+    border-radius: var(--radius-medium);
+}
+
+.glass-card-medium {
+    padding: 16px;
+    border-radius: var(--radius-large);
+}
+
+.glass-card-large {
+    padding: 24px;
+    border-radius: var(--radius-xlarge);
+}
+
+/* Glasmorphismus mit Akzentfarben */
+.glass-card-blue {
+    background: linear-gradient(135deg, 
+        rgba(0, 122, 255, 0.1) 0%, 
+        rgba(0, 122, 255, 0.05) 100%);
+    border-color: rgba(0, 122, 255, 0.3);
+}
+
+.glass-card-green {
+    background: linear-gradient(135deg, 
+        rgba(52, 199, 89, 0.1) 0%, 
+        rgba(52, 199, 89, 0.05) 100%);
+    border-color: rgba(52, 199, 89, 0.3);
+}
+
+.glass-card-orange {
+    background: linear-gradient(135deg, 
+        rgba(255, 149, 0, 0.1) 0%, 
+        rgba(255, 149, 0, 0.05) 100%);
+    border-color: rgba(255, 149, 0, 0.3);
+}
+
+.glass-card-red {
+    background: linear-gradient(135deg, 
+        rgba(255, 59, 48, 0.1) 0%, 
+        rgba(255, 59, 48, 0.05) 100%);
+    border-color: rgba(255, 59, 48, 0.3);
+}
+
+.glass-card-purple {
+    background: linear-gradient(135deg, 
+        rgba(175, 82, 222, 0.1) 0%, 
+        rgba(175, 82, 222, 0.05) 100%);
+    border-color: rgba(175, 82, 222, 0.3);
+}
+
+/* Glasmorphismus Schieberegler */
+.glass-slider {
+    position: relative;
+    height: 8px;
+    background: var(--glass-border);
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.glass-slider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        var(--accent-blue) 0%, 
+        var(--accent-green) 50%, 
+        var(--accent-orange) 100%);
+    opacity: 0.3;
+    border-radius: 4px;
+}
+
+.glass-slider-thumb {
+    position: absolute;
+    top: -6px;
+    width: 20px;
+    height: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 2px solid var(--accent-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-medium);
+    z-index: 2;
+}
+
+.glass-slider-thumb:hover {
+    transform: scale(1.1);
+    border-color: var(--accent-green);
+}
+
+.glass-slider-thumb:active {
+    transform: scale(1.2);
+    box-shadow: var(--shadow-large);
+}
+
+/* Glasmorphismus Buttons */
+.glass-button {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-medium);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    min-height: var(--min-touch-size);
+    min-width: var(--min-touch-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.glass-button:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.glass-button:active {
+    transform: scale(var(--touch-feedback-scale));
+}
+
+.glass-button.primary {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+}
+
+.glass-button.primary:hover {
+    background: rgba(0, 122, 255, 0.9);
+    border-color: rgba(0, 122, 255, 0.9);
+}
+
+.glass-button.success {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: white;
+}
+
+.glass-button.warning {
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+    color: white;
+}
+
+.glass-button.danger {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+    color: white;
+}
+
+/* Glasmorphismus Input */
+.glass-input {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-medium);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    font-size: 16px;
+    width: 100%;
+    transition: all var(--transition-medium);
+    min-height: var(--min-touch-size);
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.glass-input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Glasmorphismus Modal */
+.glass-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+}
+
+.glass-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.glass-modal-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xlarge);
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-large);
+    transform: scale(0.9);
+    transition: all var(--transition-medium);
+}
+
+.glass-modal.show .glass-modal-content {
+    transform: scale(1);
+}
+
+/* Glasmorphismus Tooltip */
+.glass-tooltip {
+    position: relative;
+}
+
+.glass-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-small);
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-fast);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.glass-tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* Glasmorphismus Progress Bar */
+.glass-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--glass-border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        var(--accent-blue) 0%, 
+        var(--accent-green) 100%);
+    border-radius: 4px;
+    transition: width var(--transition-medium);
+    position: relative;
+}
+
+.glass-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Glasmorphismus Status Indicator */
+.glass-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-large);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.glass-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.glass-status-dot.online {
+    background: var(--accent-green);
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.glass-status-dot.offline {
+    background: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red);
+}
+
+.glass-status-dot.warning {
+    background: var(--accent-orange);
+    box-shadow: 0 0 8px var(--accent-orange);
+}
+
+/* iOS 9.3.5 Fallbacks */
+@supports not (backdrop-filter: blur(20px)) {
+    .glass-card,
+    .glass-button,
+    .glass-input,
+    .glass-modal-content {
+        background: var(--blur-fallback);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .glass-slider-thumb {
+        background: var(--blur-fallback);
+        border: 2px solid var(--accent-blue);
+    }
+    
+    .glass-modal {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+/* iOS 9.3.5 Hardware-Beschleunigung */
+.ios9-optimized .glass-card,
+.ios9-optimized .glass-button,
+.ios9-optimized .glass-slider-thumb {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.ios9-optimized .glass-card:hover,
+.ios9-optimized .glass-button:hover {
+    transform: translateY(-2px) translateZ(0);
+    -webkit-transform: translateY(-2px) translateZ(0);
+}
+
+.ios9-optimized .glass-button:active,
+.ios9-optimized .glass-slider-thumb:active {
+    transform: scale(var(--touch-feedback-scale)) translateZ(0);
+    -webkit-transform: scale(var(--touch-feedback-scale)) translateZ(0);
+}
