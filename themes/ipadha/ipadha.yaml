@@ -1,0 +1,32 @@
+# iPadHA Theme für Home Assistant
+# Optimiert für iOS 9.3.5 mit Glasmorphismus-Design
+
+# Hauptfarben
+primary-color: "#007AFF"
+accent-color: "#34C759"
+background-color: "#1C1C1E"
+surface-color: "rgba(255, 255, 255, 0.1)"
+text-primary-color: "rgba(255, 255, 255, 0.9)"
+text-secondary-color: "rgba(255, 255, 255, 0.6)"
+
+# Glasmorphismus-Effekte
+glass-bg: "rgba(255, 255, 255, 0.1)"
+glass-border: "rgba(255, 255, 255, 0.2)"
+glass-shadow: "rgba(0, 0, 0, 0.1)"
+
+# Akzentfarben
+accent-blue: "rgba(0, 122, 255, 0.8)"
+accent-green: "rgba(52, 199, 89, 0.8)"
+accent-orange: "rgba(255, 149, 0, 0.8)"
+accent-red: "rgba(255, 59, 48, 0.8)"
+
+# Touch-Optimierung
+min-touch-target-size: "60px"
+border-radius: "16px"
+card-padding: "20px"
+tile-margin: "16px"
+
+# iOS 9.3.5 Kompatibilität
+webkit-prefixes: true
+hardware-acceleration: true
+touch-action: "manipulation"

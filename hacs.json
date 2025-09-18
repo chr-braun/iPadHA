@@ -1,9 +1,9 @@
 {
   "name": "iPadHA",
-  "content_in_root": false,
+  "content_in_root": true,
   "filename": "ipadha",
   "render_readme": true,
-  "domains": ["frontend"],
+  "domains": ["theme"],
   "homeassistant": "2021.1.0",
   "iot_class": "Local Push",
   "requirements": [],
@@ -11,7 +11,7 @@
   "codeowners": ["@chr-braun"],
   "version": "0.1.0",
   "description": "iPadHA - Home Assistant Dashboard für iOS 9.3.5 mit Glasmorphismus-Design",
-  "category": "frontend",
+  "category": "theme",
   "tags": [
     "ipad",
     "ios9",

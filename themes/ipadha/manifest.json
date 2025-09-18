@@ -1,0 +1,19 @@
+{
+  "name": "iPadHA",
+  "version": "0.1.0",
+  "description": "iPadHA - Home Assistant Dashboard für iOS 9.3.5 mit Glasmorphismus-Design",
+  "author": "chr-braun",
+  "homeassistant": "2021.1.0",
+  "render_readme": true,
+  "url": "https://github.com/chr-braun/iPadHA",
+  "hacs": "1.0.0",
+  "tags": [
+    "ipad",
+    "ios9",
+    "dashboard",
+    "glasmorphism",
+    "touch-optimized",
+    "home-assistant"
+  ],
+  "category": "frontend"
+}
