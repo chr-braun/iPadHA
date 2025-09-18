@@ -7,10 +7,10 @@ module.exports = {
     // Home Assistant Konfiguration
     homeAssistant: {
         // Home Assistant URL (ohne /api)
-        url: 'http://192.168.178.29:8123',
+        url: 'http://localhost:8123',
         
         // Long-lived Access Token (erstellen unter HA Profil)
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4YmFhYTBlNTQ5Mjg0OGFmYjhhMDhiM2QwNDIwNTYzOCIsImlhdCI6MTc1ODIyNTkwMywiZXhwIjoyMDczNTg1OTAzfQ.2h86qNFjecZoNKaEXzaQ7gCcwtt1jCaLpYnrxqfSAAc',
+        token: 'YOUR_LONG_LIVED_ACCESS_TOKEN',
         
         // Polling-Intervall in Millisekunden (falls WebSocket nicht funktioniert)
         pollingInterval: 5000,
@@ -25,7 +25,7 @@ module.exports = {
     // Dashboard Konfiguration
     dashboard: {
         // Dashboard-Titel
-        title: 'Mein iPadHA Dashboard',
+        title: 'iPadHA Dashboard',
         
         // Locale für Datum/Zeit
         locale: 'de-DE',

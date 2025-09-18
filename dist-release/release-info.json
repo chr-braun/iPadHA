@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "releaseName": "iPadHA v0.1.0 - Initial Release",
-  "releaseDate": "2025-09-18T19:39:26.752Z",
+  "releaseDate": "2025-09-18T19:56:38.188Z",
   "assets": {
     "source": "ipadha-source-v0.1.0.zip",
     "hacs": "ipadha-hacs-v0.1.0.zip",
@@ -11,7 +11,7 @@
     "nodeVersion": "v24.3.0",
     "platform": "darwin",
     "arch": "x64",
-    "timestamp": 1758224366752
+    "timestamp": 1758225398188
   },
   "installation": {
     "hacs": {
